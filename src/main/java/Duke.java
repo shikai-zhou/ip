@@ -34,13 +34,9 @@ public class Duke {
 
     public static void done(String in, Task[] tasks) {
         int i = 0;
-        for (int j = 1; j < in.length(); j++) {
-            char n = in.charAt(in.length() - j);
-            if (n == ' ') {
-                break;
-            }
-            i += (Character.getNumericValue(n)*Math.pow(10,(j-1)));
-        }
+        int dividerPosition = in.indexOf(" ");
+        String number = in.substring(dividerPosition+1);
+        i = Integer.parseInt(number);
         i = i - 1; //the user counts from 1 instead of 0
         tasks[i].setAsDone();
         System.out.println("Nice! I've marked this task as done: ");
