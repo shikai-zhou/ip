@@ -3,21 +3,20 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        Task[] tasks ;
+        Task[] tasks;
         tasks = new Task[100];
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         int i = 0;
         while (true) {
             String input = in.nextLine();
-            if (input.equals("bye")) break;
-            else if (input.equals("list")){
+            if (input.equals("bye")) {
+                break;
+            } else if (input.equals("list")) {
                 list(i, tasks);
-            }
-            else if (input.matches("done(.*)")) {
+            } else if (input.matches("done(.*)")) {
                 done(input, tasks);
-            }
-            else {
+            } else {
                 tasks[i] = new Task(input);
                 System.out.println("added: " + tasks[i].getDescription());
                 i++;
