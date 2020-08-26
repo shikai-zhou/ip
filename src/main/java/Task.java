@@ -3,7 +3,7 @@ public class Task {
     protected boolean isDone;
     //constructor
     public Task(String description) {
-        this.description = description;
+        this.description = description.trim();
         this.isDone = false;
     }
 
@@ -17,6 +17,10 @@ public class Task {
 
     public void setAsDone() {
         this.isDone = true;
+    }
+
+    public String toString() {
+        return "["+this.getStatusIcon()+"] "+this.getDescription();
     }
     //...
 }
