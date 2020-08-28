@@ -20,10 +20,10 @@ public class Duke {
             } else if (input.matches("todo.*")){
                 todo(input, tasks, size);
                 size++;
-            } else if (input.matches("deadline.*")){
+            } else if (input.matches("deadline.*")) {
                 deadline(input, tasks, size);
                 size++;
-            } else if (input.matches("event.*")){
+            } else if (input.matches("event.*")) {
                 event(input, tasks, size);
                 size++;
             } else {
