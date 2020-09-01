@@ -1,10 +1,11 @@
 import java.util.Scanner;
 
 public class Duke {
+    static int MAX_SIZE = 100;
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         Task[] tasks;
-        tasks = new Task[100];
+        tasks = new Task[MAX_SIZE];
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         int size = 0;
@@ -56,24 +57,24 @@ public class Duke {
     public static void todo(String in, Task[] tasks, int size) {
         int dividerPosition = in.indexOf(" ");
         tasks[size] = new Todo(in.substring(dividerPosition+1));
-        System.out.println("Got it. I've added this task: ");
-        System.out.println("  " + tasks[size].toString());
-        System.out.println("Now you have " + (size+1) + " tasks in the list.");
+        printEvent(tasks, size);
     }
 
     public static void deadline(String in, Task[] tasks, int size) {
         int dividerPosition1 = in.indexOf(" ");
         int dividerPosition2 = in.indexOf("/");
         tasks[size] = new Deadline(in.substring((dividerPosition1+1),dividerPosition2), in.substring(dividerPosition2+4));
-        System.out.println("Got it. I've added this task: ");
-        System.out.println("  "+tasks[size].toString());
-        System.out.println("Now you have " + (size+1) + " tasks in the list.");
+        printEvent(tasks, size);
     }
 
     public static void event(String in, Task[] tasks, int size) {
         int dividerPosition1 = in.indexOf(" ");
         int dividerPosition2 = in.indexOf("/");
         tasks[size] = new Event(in.substring((dividerPosition1+1),dividerPosition2), in.substring(dividerPosition2+4));
+        printEvent(tasks, size);
+    }
+
+    public static void printEvent (Task[] tasks, int size) {
         System.out.println("Got it. I've added this task: ");
         System.out.println("  "+tasks[size].toString());
         System.out.println("Now you have " + (size+1) + " tasks in the list.");
