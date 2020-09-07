@@ -1,0 +1,3 @@
+todo read book
+event share book /at 12pm
+deadline return book /by sunday

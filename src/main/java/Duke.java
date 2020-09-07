@@ -1,82 +1,87 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
-    static int MAX_SIZE = 100;
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        Task[] tasks;
-        tasks = new Task[MAX_SIZE];
+        ArrayList<Task> tasks = new ArrayList<Task>();
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
-        int size = 0;
+        int numOfTasks = 0;
         // parses the user input
         while (true) {
             String input = in.nextLine();
             if (input.equals("bye")) {
                 break;
             } else if (input.equals("list")) {
-                list(size, tasks);
+                list(numOfTasks, tasks);
             } else if (input.matches("done(.*)")) {
-                done(input, tasks);
+                markDone(input, tasks);
             } else if (input.matches("todo.*")){
-                todo(input, tasks, size);
-                size++;
+                addTodo(input, tasks, numOfTasks);
+                numOfTasks++;
             } else if (input.matches("deadline.*")) {
-                deadline(input, tasks, size);
-                size++;
+                addDeadline(input, tasks, numOfTasks);
+                numOfTasks++;
             } else if (input.matches("event.*")) {
-                event(input, tasks, size);
-                size++;
+                addEvent(input, tasks, numOfTasks);
+                numOfTasks++;
             } else {
-                tasks[size] = new Task(input);
-                System.out.println("added: " + tasks[size].getDescription());
-                size++;
+                addTask(input, tasks, numOfTasks);
             }
         }
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    public static void list(int size, Task[] tasks) {
+    public static void list(int size, ArrayList<Task> tasks) {
         System.out.println("Here are the tasks in your list:");
         for (int j = 0; j < size; j++) {
-            System.out.println((j+1)+"." + tasks[j].toString() );
+            System.out.println((j+1)+"." + tasks.get(j).toString() );
         }
     }
 
-    public static void done(String in, Task[] tasks) {
-        int i = 0;
+    public static void markDone(String in, ArrayList<Task> tasks) {
         int dividerPosition = in.indexOf(" ");
         String number = in.substring(dividerPosition+1);
-        i = Integer.parseInt(number);
+        int i = Integer.parseInt(number);
         i = i - 1; //the user counts from 1 instead of 0
-        tasks[i].setAsDone();
+        tasks.get(i).setAsDone();
         System.out.println("Nice! I've marked this task as done: ");
-        System.out.println("  "+tasks[i].toString());
+        System.out.println("  "+tasks.get(i).toString());
     }
 
-    public static void todo(String in, Task[] tasks, int size) {
+    public static void addTask (String input, ArrayList<Task> tasks, int numOfTasks) {
+        tasks.add(new Task(input));
+        System.out.println("added: " + tasks.get(numOfTasks).getDescription());
+        numOfTasks++;
+    }
+
+    public static void addTodo(String in, ArrayList<Task> tasks, int numOfTasks) {
         int dividerPosition = in.indexOf(" ");
-        tasks[size] = new Todo(in.substring(dividerPosition+1));
-        printEvent(tasks, size);
+        tasks.add(new Todo(in.substring(dividerPosition+1)));
+        printEvent(tasks, numOfTasks);
+        numOfTasks++;
     }
 
-    public static void deadline(String in, Task[] tasks, int size) {
+    public static void addDeadline(String in, ArrayList<Task> tasks, int numOfTasks) {
         int dividerPosition1 = in.indexOf(" ");
         int dividerPosition2 = in.indexOf("/");
-        tasks[size] = new Deadline(in.substring((dividerPosition1+1),dividerPosition2), in.substring(dividerPosition2+4));
-        printEvent(tasks, size);
+        tasks.add(new Deadline(in.substring((dividerPosition1+1),dividerPosition2), in.substring(dividerPosition2+4)));
+        printEvent(tasks, numOfTasks);
+        numOfTasks++;
     }
 
-    public static void event(String in, Task[] tasks, int size) {
+    public static void addEvent(String in, ArrayList<Task> tasks, int numOfTasks) {
         int dividerPosition1 = in.indexOf(" ");
         int dividerPosition2 = in.indexOf("/");
-        tasks[size] = new Event(in.substring((dividerPosition1+1),dividerPosition2), in.substring(dividerPosition2+4));
-        printEvent(tasks, size);
+        tasks.add(new Event(in.substring((dividerPosition1+1),dividerPosition2), in.substring(dividerPosition2+4)));
+        printEvent(tasks, numOfTasks);
+        numOfTasks++;
     }
 
-    public static void printEvent (Task[] tasks, int size) {
+    public static void printEvent (ArrayList<Task> tasks, int numOfTasks) {
         System.out.println("Got it. I've added this task: ");
-        System.out.println("  "+tasks[size].toString());
-        System.out.println("Now you have " + (size+1) + " tasks in the list.");
+        System.out.println("  "+tasks.get(numOfTasks).toString());
+        System.out.println("Now you have " + (numOfTasks+1) + " tasks in the list.");
     }
 }
