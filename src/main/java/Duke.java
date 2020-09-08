@@ -1,5 +1,9 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Event;
+import duke.task.Deadline;
 
 public class Duke {
     public static void main(String[] args) {
@@ -41,9 +45,9 @@ public class Duke {
         }
     }
 
-    public static void list(int size, ArrayList<Task> tasks) {
+    public static void list(int numOfTasks, ArrayList<Task> tasks) {
         System.out.println("Here are the tasks in your list:");
-        for (int j = 0; j < size; j++) {
+        for (int j = 0; j < numOfTasks; j++) {
             System.out.println((j+1)+"." + tasks.get(j).toString() );
         }
     }
@@ -56,7 +60,7 @@ public class Duke {
         try {
             tasks.get(i).setAsDone();
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Sorry, I can't find such an task.");
+            System.out.println("Sorry, I can't find such a task.");
             return;
         }
         System.out.println("Nice! I've marked this task as done: ");
@@ -98,6 +102,6 @@ public class Duke {
     public static void printEvent (ArrayList<Task> tasks, int numOfTasks) {
         System.out.println("Got it. I've added this task: ");
         System.out.println("  "+tasks.get(numOfTasks).toString());
-        System.out.println("Now you have " + (numOfTasks+1) + " tasks in the list.");
+        System.out.println("Now you have " + (numOfTasks+1) + " task(s) in the list.");
     }
 }
