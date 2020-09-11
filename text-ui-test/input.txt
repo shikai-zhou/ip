@@ -1,3 +1,7 @@
-todo read book
-event share book /at 12pm
-deadline return book /by sunday
+todo borrow book
+event project meeting /at Mon 2-4pm
+deadline do homework /by no idea :-p
+list
+todo
+blah
+bye
