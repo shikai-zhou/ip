@@ -7,12 +7,12 @@ import duke.task.Deadline;
 
 
 public class Duke {
+    public static int numOfTasks = 0;
+    public static ArrayList<Task> tasks = new ArrayList<>();
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        ArrayList<Task> tasks = new ArrayList<Task>();
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
-        int numOfTasks = 0;
         // parses the user input
         while (true) {
             String input = in.nextLine();
@@ -37,6 +37,8 @@ public class Duke {
                 } else if (input.matches("event.*")) {
                     addEvent(input, tasks, numOfTasks);
                     numOfTasks++;
+                } else if (input.matches("delete.*")) {
+                    deleteTask(input);
                 } else {
                     throw new UnkownCommandException();
                 }
@@ -47,9 +49,14 @@ public class Duke {
     }
 
     public static void list(int numOfTasks, ArrayList<Task> tasks) {
-        System.out.println("Here are the tasks in your list:");
-        for (int j = 0; j < numOfTasks; j++) {
-            System.out.println((j+1)+"." + tasks.get(j).toString() );
+        if (numOfTasks == 0) {
+            System.out.println("Your list is empty.");
+        }
+        else {
+            System.out.println("Here are the task(s) in your list:");
+            for (int j = 0; j < numOfTasks; j++) {
+                System.out.println((j + 1) + "." + tasks.get(j).toString());
+            }
         }
     }
 
@@ -65,13 +72,23 @@ public class Duke {
             return;
         }
         System.out.println("Nice! I've marked this task as done: ");
-        System.out.println("  "+tasks.get(i).toString());
+        System.out.println(tasks.get(i).toString());
     }
 
     public static void addTask (String input, ArrayList<Task> tasks, int numOfTasks) {
         tasks.add(new Task(input));
         System.out.println("added: " + tasks.get(numOfTasks).getDescription());
         numOfTasks++;
+    }
+
+    public static void deleteTask (String input) {
+        int dividerPosition = input.indexOf(" ");
+        int index = Integer.parseInt(input.substring(dividerPosition+1)) - 1;
+        System.out.println("Noted. I've removed this task: ");
+        System.out.println(tasks.get(index).toString());
+        tasks.remove(index);
+        numOfTasks--;
+        System.out.println("Now you have " + (numOfTasks) +" task(s) in the list.");
     }
 
     public static void addTodo(String in, ArrayList<Task> tasks, int numOfTasks) throws EmptyDescriptionException{
@@ -102,7 +119,7 @@ public class Duke {
 
     public static void printEvent (ArrayList<Task> tasks, int numOfTasks) {
         System.out.println("Got it. I've added this task: ");
-        System.out.println("  "+tasks.get(numOfTasks).toString());
+        System.out.println(tasks.get(numOfTasks).toString());
         System.out.println("Now you have " + (numOfTasks+1) + " task(s) in the list.");
     }
 }
