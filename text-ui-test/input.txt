@@ -4,4 +4,5 @@ deadline do homework /by no idea :-p
 list
 todo
 blah
+delete 2
 bye
