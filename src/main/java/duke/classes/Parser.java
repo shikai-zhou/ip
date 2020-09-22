@@ -1,5 +1,6 @@
 package duke.classes;
-import duke.exceptions.*;
+import duke.exceptions.EmptyDescriptionException;
+import duke.exceptions.UnkownCommandException;
 
 import java.io.IOException;
 
@@ -9,7 +10,7 @@ public class Parser {
         Ui ui = new Ui();
         try {
             if (input.equals("bye")) {
-                ui.bye(tasks);
+                ui.exit(tasks);
                 try {
                     tasks.writeToFile("data/tasks.txt");
                 } catch (IOException e) {
@@ -25,7 +26,7 @@ public class Parser {
                     tasks.addTodo(input);
 
                 } catch (EmptyDescriptionException e) {
-                    System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                    System.out.println("OOPS!!! The description of a todo cannot be empty.");
                 }
             } else if (input.matches("deadline.*")||input.startsWith("[D]")) {
                 tasks.addDeadline(input);
@@ -37,9 +38,8 @@ public class Parser {
                 throw new UnkownCommandException();
             }
         } catch (UnkownCommandException e) {
-            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         return false;
     }
-
 }

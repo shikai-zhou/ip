@@ -3,7 +3,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-import duke.exceptions.*;
+import duke.exceptions.EmptyDescriptionException;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,6 +19,7 @@ public class TaskList {
     }
 
     public void deleteTask (String input) {
+        //remove task from list by index
         int dividerPosition = input.indexOf(" ");
         int index = Integer.parseInt(input.substring(dividerPosition+1)) - 1;
         System.out.println("Noted. I've removed this task: ");
@@ -29,6 +30,7 @@ public class TaskList {
     }
 
     public void list() {
+        //prints out all tasks in ArrayList
         if (numOfTasks == 0) {
             System.out.println("Your list is empty.");
         }
@@ -41,6 +43,7 @@ public class TaskList {
     }
 
     public void addTodo(String in) throws EmptyDescriptionException {
+        //add a new todo task
         int dividerPosition = in.indexOf(" ");
         if (dividerPosition <= 0) {
             throw new EmptyDescriptionException();
@@ -62,6 +65,7 @@ public class TaskList {
     }
 
     public void addDeadline (String in) {
+        //add a new deadline task
         Deadline t;
         boolean isFromFile = in.startsWith("[D]");
         boolean isDone = false;
@@ -90,6 +94,7 @@ public class TaskList {
     }
 
     public void addEvent(String in) {
+        //add a new event task
         Event t;
         boolean isDone = false;
         if (in.startsWith("[E]")) {
@@ -118,6 +123,7 @@ public class TaskList {
     }
 
     public void markDone(String in) {
+        //set the task as completed
         int dividerPosition = in.indexOf(" ");
         String number = in.substring(dividerPosition+1);
         int i = Integer.parseInt(number);
@@ -133,12 +139,14 @@ public class TaskList {
     }
 
     public void printTask (Task task) {
+        //prints out the task
         System.out.println("Got it. I've added this task: ");
         System.out.println(task.toString());
         System.out.println("Now you have " + (numOfTasks) + " task(s) in the list.");
     }
 
     public void writeToFile(String filePath) throws IOException {
+        //writes the task to the file
         FileWriter fw = new FileWriter(filePath);
         for (int i = 0; i < tasks.size(); i++) {
             fw.write(tasks.get(i).toString()+System.lineSeparator());

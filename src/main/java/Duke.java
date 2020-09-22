@@ -25,7 +25,7 @@ public class Duke {
                     System.out.println("New file created.");
                 }
             } catch (IOException g) {
-                System.out.println("Unable to create file.");
+                ui.showLoadingError();
             }
         }
         try {
@@ -37,6 +37,7 @@ public class Duke {
     }
 
     public void run() {
+        //run the program
         Scanner in = new Scanner(System.in);
         ui.welcome();
         while (!isTerminated) {

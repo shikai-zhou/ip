@@ -2,14 +2,15 @@ package duke.task;
 public class Task {
     protected String description;
     protected boolean isDone;
-    //constructor
+
     public Task(String description) {
+        //constructor
         this.description = description.trim();
         this.isDone = false;
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "Y" : "N"); //return Y or N symbols
     }
 
     public String getDescription() {
@@ -23,5 +24,5 @@ public class Task {
     public String toString() {
         return "["+this.getStatusIcon()+"] "+this.getDescription();
     }
-    //...
+
 }
