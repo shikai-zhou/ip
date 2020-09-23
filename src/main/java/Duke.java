@@ -45,7 +45,6 @@ public class Duke {
             isTerminated = p.parse(input, tasks);
         }
     }
-
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }

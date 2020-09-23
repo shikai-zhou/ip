@@ -133,7 +133,7 @@ public class TaskList {
         int dividerPosition = in.indexOf(" ");
         String number = in.substring(dividerPosition+1);
         int i = Integer.parseInt(number);
-        i = i - 1; //the user counts from 1 instead of 0
+        i--; //the user counts from 1 instead of 0
         try {
             tasks.get(i).setAsDone();
         } catch (IndexOutOfBoundsException e) {
@@ -170,4 +170,5 @@ public class TaskList {
             }
         }
     }
+
 }
