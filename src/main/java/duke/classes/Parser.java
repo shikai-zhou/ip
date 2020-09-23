@@ -26,14 +26,26 @@ public class Parser {
                     tasks.addTodo(input);
 
                 } catch (EmptyDescriptionException e) {
-                    System.out.println("OOPS!!! The description of a todo cannot be empty.");
+                    System.out.println("OOPS!!! The description of a tasks cannot be empty.");
                 }
             } else if (input.matches("deadline.*")||input.startsWith("[D]")) {
-                tasks.addDeadline(input);
+                try {
+                    tasks.addDeadline(input);
+
+                } catch (EmptyDescriptionException e) {
+                    System.out.println("OOPS!!! The description of a tasks cannot be empty.");
+                }
             } else if (input.matches("event.*")||input.startsWith("[E]")) {
-                tasks.addEvent(input);
+                try {
+                    tasks.addEvent(input);
+
+                } catch (EmptyDescriptionException e) {
+                    System.out.println("OOPS!!! The description of a tasks cannot be empty.");
+                }
             } else if (input.matches("delete.*")) {
                 tasks.deleteTask(input);
+            } else if (input.startsWith("find")) {
+                tasks.findTask(input);
             } else {
                 throw new UnkownCommandException();
             }

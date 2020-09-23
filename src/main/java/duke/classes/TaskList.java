@@ -4,10 +4,11 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 import duke.exceptions.EmptyDescriptionException;
-
+import java.util.regex.Matcher;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class TaskList {
     public static int numOfTasks;
@@ -64,23 +65,26 @@ public class TaskList {
         tasks.add(t);
     }
 
-    public void addDeadline (String in) {
+    public void addDeadline (String in) throws EmptyDescriptionException {
         //add a new deadline task
         Deadline t;
         boolean isFromFile = in.startsWith("[D]");
         boolean isDone = false;
+        int dividerPosition1 = in.indexOf(" ");
+        if (dividerPosition1 <= 0) {
+            throw new EmptyDescriptionException();
+        }
         if (isFromFile) {
             String c = Character.toString(in.charAt(4));
             if (c.equals("\u2713")) {
                 isDone = true;
             }
-            int dividerPosition1 = in.indexOf(" ");
             int dividerPosition2 = in.indexOf(":");
             t = new Deadline(in.substring((dividerPosition1 + 1), dividerPosition2-3),
                     in.substring(dividerPosition2 + 2, in.length()-1));
         }
         else {
-            int dividerPosition1 = in.indexOf(" ");
+
             int dividerPosition2 = in.indexOf("/");
             t = new Deadline(in.substring((dividerPosition1 + 1), dividerPosition2),
                     in.substring(dividerPosition2 + 4));
@@ -93,22 +97,24 @@ public class TaskList {
         tasks.add(t);
     }
 
-    public void addEvent(String in) {
+    public void addEvent(String in) throws EmptyDescriptionException {
         //add a new event task
         Event t;
         boolean isDone = false;
+        int dividerPosition1 = in.indexOf(" ");
+        if (dividerPosition1 <= 0) {
+            throw new EmptyDescriptionException();
+        }
         if (in.startsWith("[E]")) {
             String c = Character.toString(in.charAt(4));
             if (c.equals("\u2713")) {
                 isDone = true;
             }
-            int dividerPosition1 = in.indexOf(" ");
             int dividerPosition2 = in.indexOf(":");
             t = new Event(in.substring((dividerPosition1+1),dividerPosition2-3),
                     in.substring(dividerPosition2 + 2,in.length()-1));
         }
         else {
-            int dividerPosition1 = in.indexOf(" ");
             int dividerPosition2 = in.indexOf("/");
             t = new Event(in.substring((dividerPosition1 + 1), dividerPosition2),
                     in.substring(dividerPosition2 + 4));
@@ -152,5 +158,16 @@ public class TaskList {
             fw.write(tasks.get(i).toString()+System.lineSeparator());
         }
         fw.close();
+    }
+
+    public void findTask (String input) {
+        int dividerPosition = input.indexOf(" ");
+        Pattern searchPattern = Pattern.compile(input.substring(dividerPosition));
+        for (int i = 0; i < tasks.size(); i++) {
+            Matcher matcher = searchPattern.matcher(tasks.get(i).toString());
+            if (matcher.find()) {
+                System.out.println(tasks.get(i).toString());
+            }
+        }
     }
 }
