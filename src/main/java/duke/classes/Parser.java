@@ -1,7 +1,6 @@
 package duke.classes;
 import duke.exceptions.EmptyDescriptionException;
 import duke.exceptions.UnkownCommandException;
-
 import java.io.IOException;
 
 public class Parser {
@@ -46,11 +45,14 @@ public class Parser {
                 tasks.deleteTask(input);
             } else if (input.startsWith("find")) {
                 tasks.findTask(input);
+            } else if (input.startsWith("help")) {
+                ui.help();
             } else {
                 throw new UnkownCommandException();
             }
         } catch (UnkownCommandException e) {
             System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            ui.help();
         }
         return false;
     }

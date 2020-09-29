@@ -84,7 +84,6 @@ public class TaskList {
                     in.substring(dividerPosition2 + 2, in.length()-1));
         }
         else {
-
             int dividerPosition2 = in.indexOf("/");
             t = new Deadline(in.substring((dividerPosition1 + 1), dividerPosition2),
                     in.substring(dividerPosition2 + 4));
@@ -125,7 +124,6 @@ public class TaskList {
         numOfTasks++;
         tasks.add(t);
         printTask(t);
-
     }
 
     public void markDone(String in) {
@@ -152,7 +150,7 @@ public class TaskList {
     }
 
     public void writeToFile(String filePath) throws IOException {
-        //writes the task to the file
+        //writes the tasklist to the file to persist data for future use
         FileWriter fw = new FileWriter(filePath);
         for (int i = 0; i < tasks.size(); i++) {
             fw.write(tasks.get(i).toString()+System.lineSeparator());
@@ -161,14 +159,14 @@ public class TaskList {
     }
 
     public void findTask (String input) {
+        //find all tasks that contains user inputted string
         int dividerPosition = input.indexOf(" ");
         Pattern searchPattern = Pattern.compile(input.substring(dividerPosition));
         for (int i = 0; i < tasks.size(); i++) {
-            Matcher matcher = searchPattern.matcher(tasks.get(i).toString());
+            Matcher matcher = searchPattern.matcher((tasks.get(i).toString()));
             if (matcher.find()) {
-                System.out.println(tasks.get(i).toString());
+                System.out.println((i + 1) + "." + tasks.get(i).toString());
             }
         }
     }
-
 }

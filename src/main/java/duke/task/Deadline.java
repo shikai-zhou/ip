@@ -11,9 +11,9 @@ public class Deadline extends Task {
     protected boolean isDate;
     public Deadline(String description, String by) {
         super(description);
+        // create formatter (use English Locale to parse month names)
         DateTimeFormatter formatter = new DateTimeFormatterBuilder().parseCaseInsensitive().appendPattern("dd-MMM-yyyy")
-                // create formatter (use English Locale to parse month names)
-                .toFormatter(Locale.ENGLISH);;
+                .toFormatter(Locale.ENGLISH);
         try {
             this.date = LocalDate.parse(by, formatter);
             isDate = true;

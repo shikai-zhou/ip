@@ -13,9 +13,9 @@ public class Event extends Task {
     public Event (String description, String at) {
         super(description);
         try {
-            DateTimeFormatter formatter = new DateTimeFormatterBuilder().parseCaseInsensitive().appendPattern("dd-MMM-yyyy")
-                    // create formatter (use English Locale to parse month names)
-                    .toFormatter(Locale.ENGLISH);;
+            // create formatter (use English Locale to parse month names)
+            DateTimeFormatter formatter = new DateTimeFormatterBuilder().parseCaseInsensitive()
+                    .appendPattern("dd-MMM-yyyy").toFormatter(Locale.ENGLISH);
             this.date = LocalDate.parse(at, formatter);
             isDate = true;
         } catch (DateTimeParseException e) {
