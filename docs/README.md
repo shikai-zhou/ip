@@ -125,7 +125,7 @@ Expected outcome:
 
 `INDEX.[T][N] keyword`
 
-#### `help` - Display help options
+### `help` - Display help options
 Example of usage:
 
 `help`
