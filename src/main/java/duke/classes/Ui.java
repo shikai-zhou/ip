@@ -13,11 +13,8 @@ public class Ui {
 
     public void exit (TaskList tasks) {
         //writes current tasks to file and exit program
-        try {
-            tasks.writeToFile("data/tasks.txt");
-        } catch (IOException e) {
-            System.out.println("Error: Unable to write to file.");
-        }
+        tasks.writeToFile("data/tasks.txt");
+
         System.out.println("Bye. Hope to see you again soon!");
     }
     public void help () {

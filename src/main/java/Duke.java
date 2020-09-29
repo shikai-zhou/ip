@@ -19,14 +19,7 @@ public class Duke {
         try {
             storage.openFile(); //try to open the txt file
         } catch (FileNotFoundException e) { // if the file does not exist create one
-            try {
-                File f = new File("data/tasks.txt");
-                if (f.createNewFile()) {
-                    System.out.println("New file created.");
-                }
-            } catch (IOException g) {
-                ui.showLoadingError();
-            }
+            ui.showLoadingError();
         }
         try {
             tasks = storage.load();
@@ -46,7 +39,7 @@ public class Duke {
         }
     }
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Duke("./data/tasks.txt").run();
     }
 
 }

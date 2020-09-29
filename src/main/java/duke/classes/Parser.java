@@ -10,11 +10,7 @@ public class Parser {
         try {
             if (input.equals("bye")) {
                 ui.exit(tasks);
-                try {
-                    tasks.writeToFile("data/tasks.txt");
-                } catch (IOException e) {
-                    System.out.println("Error: Unable to write to file");
-                }
+                tasks.writeToFile("data/tasks.txt");
                 return true;
             } else if (input.equals("list")) {
                 tasks.list();

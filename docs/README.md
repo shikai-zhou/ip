@@ -157,4 +157,4 @@ Example of usage:
 
 Expected outcome:
 
-`Process finished with exit code 0`
+`Bye. Hope to see you again soon!`

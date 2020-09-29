@@ -4,6 +4,7 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 import duke.exceptions.EmptyDescriptionException;
+import java.io.File;
 import java.util.regex.Matcher;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -52,7 +53,7 @@ public class TaskList {
         boolean isDone = false;
         if (in.startsWith("[T]")) {
             String c = Character.toString(in.charAt(4));
-            if (c.equals("\u2713")) {
+            if (c.equals("Y")) {
                 isDone = true;
             }
         }
@@ -76,7 +77,7 @@ public class TaskList {
         }
         if (isFromFile) {
             String c = Character.toString(in.charAt(4));
-            if (c.equals("\u2713")) {
+            if (c.equals("Y")) {
                 isDone = true;
             }
             int dividerPosition2 = in.indexOf(":");
@@ -106,7 +107,7 @@ public class TaskList {
         }
         if (in.startsWith("[E]")) {
             String c = Character.toString(in.charAt(4));
-            if (c.equals("\u2713")) {
+            if (c.equals("Y")) {
                 isDone = true;
             }
             int dividerPosition2 = in.indexOf(":");
@@ -149,13 +150,29 @@ public class TaskList {
         System.out.println("Now you have " + (numOfTasks) + " task(s) in the list.");
     }
 
-    public void writeToFile(String filePath) throws IOException {
+    public void writeToFile(String filePath) {
         //writes the tasklist to the file to persist data for future use
-        FileWriter fw = new FileWriter(filePath);
-        for (int i = 0; i < tasks.size(); i++) {
-            fw.write(tasks.get(i).toString()+System.lineSeparator());
+        File f = new File("./data/tasks.txt");
+        try {
+            f.getParentFile().mkdirs();
+            if (f.createNewFile()) {
+                System.out.println("New file created.");
+            }
+        }catch (IOException e) {
+                Ui ui = new Ui();
+                ui.showLoadingError();
+                return;
+            }
+        try {
+            FileWriter fw = new FileWriter(f);
+            for (int i = 0; i < tasks.size(); i++) {
+                fw.write(tasks.get(i).toString() + System.lineSeparator());
+            }
+            fw.close();
+        } catch (IOException e) {
+            Ui ui = new Ui();
+            ui.showLoadingError();
         }
-        fw.close();
     }
 
     public void findTask (String input) {
