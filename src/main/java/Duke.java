@@ -1,7 +1,5 @@
 import java.util.Scanner;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import duke.classes.TaskList;
 import duke.classes.Ui;
 import duke.classes.Storage;

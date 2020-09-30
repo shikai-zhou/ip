@@ -131,21 +131,22 @@ Example of usage:
 `help`
 
 Expected outcome:
+
 `Here are all the valid commands:`
 
-`todo DESCRIPTION`
+`   todo DESCRIPTION`
 
-`event DESCRIPTION /at TIME`
+`   event DESCRIPTION /at TIME`
 
-`deadline DESCRIPTION /by TIME`
+`   deadline DESCRIPTION /by TIME`
 
-`list`
+`   list`
 
-`done INDEX`
+`   done INDEX`
 
-`find KEYWORD`
+`   find KEYWORD`
 
-`bye`
+`   bye`
 
 ### `bye` - Exits the program
 
