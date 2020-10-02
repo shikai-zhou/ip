@@ -1,7 +1,6 @@
 package duke.classes;
 import duke.exceptions.EmptyDescriptionException;
 import duke.exceptions.UnkownCommandException;
-import java.io.IOException;
 
 public class Parser {
     public boolean parse (String input, TaskList tasks) {
