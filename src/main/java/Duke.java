@@ -11,6 +11,11 @@ public class Duke {
     public static TaskList tasks;
     public static Ui ui;
     public static Parser p = new Parser();
+
+    /**
+     * Create a new instance of Duke
+     * @param filePath
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -27,6 +32,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the program
+     */
     public void run() {
         //run the program
         Scanner in = new Scanner(System.in);

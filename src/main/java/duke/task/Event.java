@@ -10,6 +10,12 @@ public class Event extends Task {
     protected LocalDate date;
     protected String at;
     protected boolean isDate;
+
+    /**
+     * Create an event
+     * @param description
+     * @param at
+     */
     public Event (String description, String at) {
         super(description);
         try {

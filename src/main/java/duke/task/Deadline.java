@@ -9,6 +9,12 @@ public class Deadline extends Task {
     protected LocalDate date;
     protected String by;
     protected boolean isDate;
+
+    /**
+     * Creates a deadline task
+     * @param description
+     * @param by
+     */
     public Deadline(String description, String by) {
         super(description);
         // create formatter (use English Locale to parse month names)

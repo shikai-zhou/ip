@@ -20,6 +20,10 @@ public class TaskList {
         numOfTasks = 0;
     }
 
+    /**
+     * Delete a task
+     * @param input
+     */
     public void deleteTask (String input) {
         //remove task from list by index
         int dividerPosition = input.indexOf(" ");
@@ -31,6 +35,9 @@ public class TaskList {
         System.out.println("Now you have " + (numOfTasks) +" task(s) in the list.");
     }
 
+    /**
+     * List out all tasks
+     */
     public void list() {
         //prints out all tasks in ArrayList
         if (numOfTasks == 0) {
@@ -44,6 +51,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Add a todo into task list
+     * @param in
+     * @throws EmptyDescriptionException
+     */
     public void addTodo(String in) throws EmptyDescriptionException {
         //add a new todo task
         int dividerPosition = in.indexOf(" ");
@@ -66,6 +78,11 @@ public class TaskList {
         tasks.add(t);
     }
 
+    /**
+     * Add a deadline into task list
+     * @param in
+     * @throws EmptyDescriptionException
+     */
     public void addDeadline (String in) throws EmptyDescriptionException {
         //add a new deadline task
         Deadline t;
@@ -97,6 +114,11 @@ public class TaskList {
         tasks.add(t);
     }
 
+    /**
+     * Adds an event into tasklist
+     * @param in
+     * @throws EmptyDescriptionException
+     */
     public void addEvent(String in) throws EmptyDescriptionException {
         //add a new event task
         Event t;
@@ -127,6 +149,10 @@ public class TaskList {
         printTask(t);
     }
 
+    /**
+     * mark as task as done
+     * @param in
+     */
     public void markDone(String in) {
         //set the task as completed
         int dividerPosition = in.indexOf(" ");
@@ -143,6 +169,10 @@ public class TaskList {
         System.out.println(tasks.get(i).toString());
     }
 
+    /**
+     * Prints task
+     * @param task
+     */
     public void printTask (Task task) {
         //prints out the task
         System.out.println("Got it. I've added this task: ");
@@ -150,6 +180,10 @@ public class TaskList {
         System.out.println("Now you have " + (numOfTasks) + " task(s) in the list.");
     }
 
+    /**
+     * Save to file
+     * @param filePath
+     */
     public void writeToFile(String filePath) {
         //writes the tasklist to the file to persist data for future use
         File f = new File("./data/tasks.txt");
@@ -175,6 +209,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Searches for a task in tasklist
+     * @param input
+     */
     public void findTask (String input) {
         //find all tasks that contains user inputted string
         int dividerPosition = input.indexOf(" ");

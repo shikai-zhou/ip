@@ -3,6 +3,12 @@ import duke.exceptions.EmptyDescriptionException;
 import duke.exceptions.UnkownCommandException;
 
 public class Parser {
+    /**
+     * Parse the user input
+     * @param input
+     * @param tasks
+     * @return
+     */
     public boolean parse (String input, TaskList tasks) {
         // parses the user input
         Ui ui = new Ui();
